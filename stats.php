@@ -2,7 +2,7 @@
 
 class stats {
 
-	public $x, $y, $size_of_y = 0, $size_of_x = 0, $sum_of_y = 0, $sum_of_xy = 0, $counter = 0;
+	public $x, $y, $size_of_y = 0, $size_of_x = 0, $sum_of_y = 0, $sum_of_xy = 0;
 	
 	/*****************************************************************************/
 	// Constructor method to set our class vars
@@ -53,16 +53,17 @@ class stats {
 	/*****************************************************************************/
 	public function covariance() 
 	{
+
 		// We can use n of y  OR n of x - they should be the same value
 		$n = $this->size_of_y;
-		
+		$counter  = 0;
 		$sum_of_x = 0;
 		foreach ($this->y as $yi) 
 		{
 			$this->sum_of_y		+= $yi;
-			$sum_of_x			+= $this->x[$this->counter];
-			$this->sum_of_xy 	+= ($yi * $this->x[$this->counter]);
-			$this->counter++;
+			$sum_of_x			+= $this->x[$counter];
+			$this->sum_of_xy 	+= ($yi * $this->x[$counter]);
+			$counter++;
 		}
 		
 		$covariance = (1/($n-1)) * ($this->sum_of_xy - ($n * ($this->sum_of_y / $n) * ($sum_of_x / $n)));
